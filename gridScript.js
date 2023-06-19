@@ -25,9 +25,6 @@ function createGrid(gridResolution) {
 
 createGrid(5);
 
-function getSizeForDivs(amountDivs, canvasSize) {
-    return canvasSize / amountDivs
-}
 
 function createClassForDivs(amountDivs, canvasSize) {
     let allColDivs = document.querySelectorAll(".col-div");
@@ -42,3 +39,12 @@ function createClassForDivs(amountDivs, canvasSize) {
     });
 }
 
+function createEventListenersForDivs() {
+    let allColDivs = document.querySelectorAll(".col-div");
+    allColDivs.forEach(div => {
+        div.addEventListener("mouseenter", function() {
+            console.log(div);
+            div.style.backgroundColor = "black";
+        });
+    });
+}
