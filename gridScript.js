@@ -57,3 +57,8 @@ function createEventListenerSetGridSizeButton() {
         createGrid(Number(userPrompt));
     })
 }
+
+function clearGrid() {
+    let mainGridDiv = document.querySelector(".main-grid-div");
+    mainGridDiv.innerHTML = "";
+}
