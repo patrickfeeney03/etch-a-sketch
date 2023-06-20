@@ -19,7 +19,7 @@ function createGrid(gridResolution) {
         mainGridDiv.appendChild(rowDiv);
         
         //console.log(consoleMessage);
-        createClassForDivs(gridResolution, 512);
+        createClassForDivs(gridResolution, 960);
     }
 }
 
