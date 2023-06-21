@@ -11,11 +11,45 @@ Addd custom square font
     src: url("./fonts/squarefont/Squareo.ttf");
 }
 
+
+
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+#set-size-buttons-container {
+    gap: 20px;
+    
+}
+
+.grid-size-button {
+    font-size: 50px;
+    font-family: "Square";
+}
+
+.small-title {
+    font-family: "Square";
+    font-size: 70px;
+    margin: 0;
+}
+
+#left-col {
+    justify-content: start;
+    align-items: center;
+    height: 100%;
 }
 
 .grid-amount-prompt {

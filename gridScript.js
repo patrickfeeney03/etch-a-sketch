@@ -24,7 +24,7 @@ function createGrid(gridResolution) {
 }
 
 createGrid(16);
-createEventListenerSetGridSizeButton();
+//createEventListenerSetGridSizeButton();
 createEventListenersForDivs();
 
 
@@ -60,6 +60,17 @@ function createEventListenerSetGridSizeButton() {
         createGrid(Number(userPrompt));
         createEventListenersForDivs();
     })
+}
+
+function createEventListenersForGridSizeButtons() {
+    let buttons = document.querySelectorAll(".grid-size-button");
+    buttons.forEach(button => {
+        button.addEventListener("click", function() {
+            //clearGrid();
+            //createGrid();
+            console.log(button.getAttribute("data-key"));
+        });
+    });
 }
 
 function clearGrid() {
