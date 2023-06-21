@@ -1,13 +1,28 @@
+/*
+Addd custom square font
+*/
+@font-face {
+    font-family: "Square";
+    src: url("./fonts/squarefont/Square.ttf");
+}
+
+@font-face {
+    font-family: "Squareo";
+    src: url("./fonts/squarefont/Squareo.ttf");
+}
+
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    
 }
 
 .grid-amount-prompt {
     font-size: 35px;
     margin: 20px;
+    font-family: "Square";
 }
 
 .main-grid-div {
@@ -30,4 +45,6 @@ body {
     width: 10px;
     height: 10px;
 }
+
+
 
