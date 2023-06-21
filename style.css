@@ -81,11 +81,22 @@ body {
 }
 
 .color-button {
+  border: none;
   width: 50px;
   height: 50px;
+  box-shadow: 6px 8px #999;
 }
 
-/* Button Colors */
+.color-button:hover {
+  filter: brightness(0.8);
+}
+
+.color-button:active {
+  box-shadow: 6px 4px #666;
+  transform: translateY(4px);
+}
+
+/* vvvvv Button Colors vvvvv */
 #color-red {
   background-color: red;
 }
@@ -122,3 +133,4 @@ body {
     rgba(255, 0, 0, 1) 100%
 );
 }
+/* ^^^^^ Button Colors ^^^^^ */
