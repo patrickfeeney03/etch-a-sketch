@@ -24,7 +24,6 @@ function createGrid(gridResolution) {
 }
 
 createGrid(16);
-//createEventListenerSetGridSizeButton();
 createEventListenersForDivs();
 
 
@@ -50,16 +49,6 @@ function createEventListenersForDivs() {
       //console.log(this);
     });
   });
-}
-
-function createEventListenerSetGridSizeButton() {
-  let buttonElement = document.querySelector(".grid-amount-prompt");
-  buttonElement.addEventListener("click", function () {
-    let userPrompt = prompt("Enter the desired size. For example 32, 64, 50");
-    clearGrid();
-    createGrid(Number(userPrompt));
-    createEventListenersForDivs();
-  })
 }
 
 function createEventListenersForGridSizeButtons() {
