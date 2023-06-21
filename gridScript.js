@@ -66,8 +66,8 @@ function createEventListenersForGridSizeButtons() {
     let buttons = document.querySelectorAll(".grid-size-button");
     buttons.forEach(button => {
         button.addEventListener("click", function() {
-            //clearGrid();
-            //createGrid();
+            clearGrid();
+            createGrid(Number(button.getAttribute("data-key")));
             console.log(button.getAttribute("data-key"));
         });
     });
