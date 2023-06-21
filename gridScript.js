@@ -19,12 +19,13 @@ function createGrid(gridResolution) {
     mainGridDiv.appendChild(rowDiv);
 
     //console.log(consoleMessage);
-    createClassForDivs(gridResolution, 960);
+    createClassForDivs(gridResolution, 768);
   }
 }
 
 createGrid(16);
-createEventListenersForDivs();
+createEventListenersForGridSizeButtons();
+createEventListenersForDivsDarkening();
 
 
 function createClassForDivs(amountDivs, canvasSize) {
@@ -39,16 +40,23 @@ function createClassForDivs(amountDivs, canvasSize) {
   });
 }
 
-function createEventListenersForDivs() {
+function createEventListenersForDivsDarkening() {
   let allColDivs = document.querySelectorAll(".col-div");
   allColDivs.forEach(div => {
-    div.addEventListener("mouseenter", function () {
-      //console.log(div);
-      //div.style.backgroundColor = "black";
-      makeDarkerByPercentage(0.1, this);
-      //console.log(this);
-    });
+    div.addEventListener("mouseenter", handler);
+
+    
   });
+}
+function handler(e) {
+      let elem = e.target
+      makeDarkerByPercentage(0.1, elem);
+    }
+function removeDarkening() {
+  let allColDivs = document.querySelectorAll(".col-div");
+  allColDivs.forEach(div => {
+    div.removeEventListener("mouseenter", handler);
+  })
 }
 
 function createEventListenersForGridSizeButtons() {
@@ -58,6 +66,7 @@ function createEventListenersForGridSizeButtons() {
       clearGrid();
       createGrid(Number(button.getAttribute("data-key")));
       console.log(button.getAttribute("data-key"));
+      createEventListenersForDivsDarkening();
     });
   });
 }
@@ -68,16 +77,13 @@ function clearGrid() {
 }
 
 function makeDarkerByPercentage(change, element) {
-  //let element = document.querySelector(elementIdOrClass);
   let elementFilters = window.getComputedStyle(element).getPropertyValue("filter");
   let elementFiltersArray = elementFilters.split(" ");
   let intValueBrightness = 1;
-
   if (elementFilters != "none") {
     for (let i = 0; i < elementFiltersArray.length; i++) {
       if (elementFiltersArray[i].includes("brightness")) {
         // Element has already been modified.
-        console.log("found");
         intValueBrightness = elementFiltersArray[i].split("(")[1].split(")")[0];
         elementFiltersArray.splice(i, 1);
       }
@@ -86,26 +92,29 @@ function makeDarkerByPercentage(change, element) {
     let convertArrayToString = elementFiltersArray.join(" ");
     let finalString = convertArrayToString + appendingMessage;
     element.style.filter = finalString;
-
   } else {
-    element.style.filter = `brightness(${intValueBrightness - change})`
+    element.style.filter = `brightness(${intValueBrightness - change})`;
   }
-
-  //console.log(finalString);
-  //console.log(convertArrayToString)
-  //console.log(elementFiltersArray);
-  console.log(`number ${intValueBrightness}`);
-
-  //let brightnessExample = 10;
-  //elementFilters += ` brightness(${brightnessExample}%)`
-  //element.style.filter = elementFilters;
-  //console.log(element.style.filter);
-  //let filterArray = elementFilters.split(" ");
-  //console.log(filterArray);
-
-  //element.style.filter = `brightness(${Number(elementBrightness) - percentageOfChange}%)`;
-  //elementBrightness += percentageOfChange;
-  //console.log(elementFilters);
 }
 
-//makeDarkerByPercentage(0.1, ".main-grid-div");
+function createEventListenerForColourButtons() {
+  let elements = document.querySelectorAll(".color-button");
+  elements.forEach((element) => {
+    element.addEventListener("click", myHandler);
+  });
+}
+
+
+function myHandler(e) {
+  console.log(e.target);
+
+}
+
+function removeListener() {
+  let elements = document.querySelectorAll(".color-button");
+  elements.forEach((element) => {
+    element.removeEventListener("click", myHandler);
+  })
+}
+
+createEventListenerForColourButtons();
