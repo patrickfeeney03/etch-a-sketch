@@ -56,9 +56,34 @@ body {
   margin: 0;
 }
 
+#middle-container {
+  width: 100vw;
+  align-items: start;
+  justify-content: center;
+}
+
 #left-col {
+  position: relative;
   justify-content: start;
-  align-items: center;
+  align-items: end;
+  height: 100%;
+}
+
+#main-grid-div {
+
+}
+
+.box {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#right-col {
+  position: relative;
+  justify-content: start;
+  align-items: start;
   height: 100%;
 }
 
@@ -141,6 +166,7 @@ body {
 
 
 #eraser-container {
+  width: 100%;
   margin: 25px 0 0 0;
   align-items: end;
   display: grid;

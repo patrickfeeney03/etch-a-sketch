@@ -8,14 +8,14 @@ function createGrid(gridResolution) {
       colDiv.classList.add("col-div");
       rowDiv.appendChild(colDiv);
     }
-    let mainGridDiv = document.querySelector(".main-grid-div");
+    let mainGridDiv = document.querySelector("#main-grid-div");
     mainGridDiv.appendChild(rowDiv);
 
     setDivsStyle(gridResolution, 576);
   }
 }
 function clearGrid() {
-  let mainGridDiv = document.querySelector(".main-grid-div");
+  let mainGridDiv = document.querySelector("#main-grid-div");
   mainGridDiv.innerHTML = "";
 }
 // Grid ^^^^^^^
@@ -40,7 +40,6 @@ function setDivsStyle(amountDivs, canvasSize) {
     coldiv.style.backgroundColor = "#E7CEA6";
     coldiv.style.width = `${size}px`;
     coldiv.style.height = `${size}px`;
-    coldiv.draggable = false;
   });
 }
 

@@ -15,35 +15,37 @@
   <div class="header">
     <h1 class="large-title" id="main-title">My Etch A Sketch</h1>
   </div>
-  <div class="middle-container flex-row">
-    <div class="flex-col" id="left-col">
-      <p class="small-title">Set Size</p>
-      <div class="flex-col" id="set-size-buttons-container">
-        <button class="grid-size-button" data-key="8">8 x 8</button>
-        <button class="grid-size-button" data-key="16">16 x 16</button>
-        <button class="grid-size-button" data-key="32">32 x 32</button>
-      </div>      
-    </div>
+  
+  <div class="flex-row" id="middle-container">
 
-
-
-
-    <div class="main-grid-div">
-
-    </div>
-
-    <div>
-      <p class="small-title">Choose Color</p>
-      <div id="color-buttons-container">
-        <button class="color-button" id="color-red" data-color="red"></button>
-        <button class="color-button" id="color-blue" data-color="blue"></button>
-        <button class="color-button" id="color-yellow" data-color="yellow"></button>
-        <button class="color-button" id="color-orange" data-color="orange"></button>
-        <button class="color-button" id="color-black" data-color="black"></button>
-        <button class="color-button" id="color-rainbow" data-color="rainbow"></button>
+    <div class="flex-col box" id="left-col">
+      <div id="left-sub-col">
+        <p class="small-title">Set Size</p>
+        <div class="flex-col" id="set-size-buttons-container">
+          <button class="grid-size-button" data-key="8">8 x 8</button>
+          <button class="grid-size-button" data-key="16">16 x 16</button>
+          <button class="grid-size-button" data-key="32">32 x 32</button>
+        </div>
       </div>
-      <div class="flex-col" id="eraser-container">
-        <img src="./assets/eraser.svg" id="eraser" data-color="#e7cea6">
+    </div>
+
+    <div class="box" id="main-grid-div">
+    </div>
+
+    <div class="flex-col box" id="right-col">
+      <div id="right-sub-col">
+        <p class="small-title">Choose Color</p>
+        <div id="color-buttons-container">
+          <button class="color-button" id="color-red" data-color="red"></button>
+          <button class="color-button" id="color-blue" data-color="blue"></button>
+          <button class="color-button" id="color-yellow" data-color="yellow"></button>
+          <button class="color-button" id="color-orange" data-color="orange"></button>
+          <button class="color-button" id="color-black" data-color="black"></button>
+          <button class="color-button" id="color-rainbow" data-color="rainbow"></button>
+        </div>
+        <div class="flex-col" id="eraser-container">
+          <img src="./assets/eraser.svg" id="eraser" data-color="#e7cea6">
+        </div>        
       </div>
     </div>
   </div>
