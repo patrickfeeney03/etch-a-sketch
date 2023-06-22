@@ -1,18 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Etch A Sketch</title>
-    <link rel="stylesheet" href="./style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Etch A Sketch</title>
+  <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
+  <!--
     <button class="grid-amount-prompt">Set Grid Size</button>
+    -->
+
+  <div class="middle-container flex-row">
+    <div class="flex-col" id="left-col">
+      <p class="small-title">Set Size</p>
+      <div class="flex-col" id="set-size-buttons-container">
+        <button class="grid-size-button" data-key="8">8 x 8</button>
+        <button class="grid-size-button" data-key="16">16 x 16</button>
+        <button class="grid-size-button" data-key="32">32 x 32</button>
+      </div>      
+    </div>
+
+
+
+
     <div class="main-grid-div">
 
     </div>
-    
+
+    <div>
+      <p class="small-title">Choose Color</p>
+      <div id="color-buttons-container">
+        <button class="color-button" id="color-red" data-color="red"></button>
+        <button class="color-button" id="color-blue" data-color="blue"></button>
+        <button class="color-button" id="color-yellow" data-color="yellow"></button>
+        <button class="color-button" id="color-orange" data-color="orange"></button>
+        <button class="color-button" id="color-black" data-color="black"></button>
+        <button class="color-button" id="color-rainbow" data-color="rainbow"></button>
+
+      </div>
+    </div>
+  </div>
+
+
+
 </body>
 
 <script src="./gridScript.js"></script>
+
 </html>

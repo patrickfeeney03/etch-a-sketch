@@ -1,33 +1,136 @@
+/*
+Addd custom square font
+*/
+@font-face {
+  font-family: "Square";
+  src: url("./fonts/squarefont/Square.ttf");
+}
+
+@font-face {
+  font-family: "Squareo";
+  src: url("./fonts/squarefont/Squareo.ttf");
+}
+
+
+
 body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+#set-size-buttons-container {
+  gap: 20px;
+
+}
+
+.grid-size-button {
+  font-size: 50px;
+  font-family: "Square";
+}
+
+.small-title {
+  font-family: "Square";
+  font-size: 70px;
+  margin: 0;
+}
+
+#left-col {
+  justify-content: start;
+  align-items: center;
+  height: 100%;
 }
 
 .grid-amount-prompt {
-    font-size: 35px;
-    margin: 20px;
-}
-
-.main-grid-div {
-    height: 100vh;
-    width: 100wh;
-
+  font-size: 35px;
+  margin: 20px;
+  font-family: "Square";
 }
 
 .row-div {
-    margin: 0;
-    border: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: row;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
 }
 
 .col-div {
-    border: solid 1px red;
-    box-sizing: border-box;
-    width: 10px;
-    height: 10px;
+  border: solid 1px red;
+  box-sizing: border-box;
+  width: 10px;
+  height: 10px;
 }
 
+#color-buttons-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+  row-gap: 25px;
+}
+
+.color-button {
+  border: none;
+  width: 50px;
+  height: 50px;
+  box-shadow: 6px 8px #999;
+}
+
+.color-button:hover {
+  filter: brightness(0.8);
+}
+
+.color-button:active {
+  box-shadow: 6px 4px #666;
+  transform: translateY(4px);
+}
+
+/* vvvvv Button Colors vvvvv */
+#color-red {
+  background-color: red;
+}
+
+#color-blue {
+  background-color: blue;
+}
+
+#color-yellow {
+  background-color: yellow;
+}
+
+#color-orange {
+  background-color: orange;
+}
+
+#color-black {
+  background-color: black;
+}
+
+#color-rainbow {
+  background: linear-gradient(
+    45deg,
+    rgba(255, 0, 0, 1) 0%,
+    rgba(255, 154, 0, 1) 10%,
+    rgba(208, 222, 33, 1) 20%,
+    rgba(79, 220, 74, 1) 30%,
+    rgba(63, 218, 216, 1) 40%,
+    rgba(47, 201, 226, 1) 50%,
+    rgba(28, 127, 238, 1) 60%,
+    rgba(95, 21, 242, 1) 70%,
+    rgba(186, 12, 248, 1) 80%,
+    rgba(251, 7, 217, 1) 90%,
+    rgba(255, 0, 0, 1) 100%
+);
+}
+/* ^^^^^ Button Colors ^^^^^ */
