@@ -121,6 +121,7 @@ function myHandler(e) {
     //div.addEventListener("mouseenter", setDivBackgroundColor);
     //div.addEventListener("click", setDivBackgroundColor);
     div.addEventListener("mousedown", setDivBackgroundColor);
+    div.addEventListener("mouseup", removeMouseMovementListeners);
     // ^^^^ Painting triggering from mouse input ^^^^
   });
 }
@@ -128,26 +129,27 @@ function myHandler(e) {
 function setDivBackgroundColor(event) {
   let triggeringDiv = event.currentTarget;
   triggeringDiv.style.backgroundColor = triggeringDiv.myColor;
-  //console.log(event.currentTarget); // Element that triggered
+
   let allDivs = document.querySelectorAll(".col-div");
   allDivs.forEach((div) => {
     div.addEventListener("mouseenter", onlySetBackground);
-  })
-  /*
-  if (event.buttons === 1 || event.type === "click") {
-    let singleDivElement = event.currentTarget;
-    let colorForBackground = singleDivElement.myColor;
-    singleDivElement.style.backgroundColor = colorForBackground;
-  }
-  */
+  });
 }
 
 function onlySetBackground(event) {
+  console.log("a");
   if (event.buttons === 1) {
     let singleDivElement = event.currentTarget;
     let colorForBackground = singleDivElement.myColor;
     singleDivElement.style.backgroundColor = colorForBackground;
   }
+}
+
+function removeMouseMovementListeners() {
+  let allDivs = document.querySelectorAll(".col-div");
+  allDivs.forEach((div) => {
+    div.removeEventListener("mouseenter", onlySetBackground);
+  });
 }
 
 
