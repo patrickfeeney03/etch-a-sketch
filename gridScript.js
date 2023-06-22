@@ -116,10 +116,6 @@ function myHandler(e) {
     div.myColor = color;
 
     // vvvv Painting triggering from mouse input vvvv
-
-    //div.addEventListener("mousemove", setDivBackgroundColor);
-    //div.addEventListener("mouseenter", setDivBackgroundColor);
-    //div.addEventListener("click", setDivBackgroundColor);
     div.addEventListener("mousedown", setDivBackgroundColor);
     div.addEventListener("mouseup", removeMouseMovementListeners);
     // ^^^^ Painting triggering from mouse input ^^^^
@@ -154,6 +150,26 @@ function removeMouseMovementListeners() {
 
 
 // ^^^^ Color Painting ^^^^
+
+
+
+// vvvv Eraser vvvv
+
+function setEraserListener() {
+  removeDarkening();
+  let eraserElement = document.querySelector("#eraser");
+  let color = eraserElement.getAttribute("data-color");
+
+  let divs = document.querySelectorAll(".col-div");
+  divs.forEach((div) => {
+    div.myColor = color;
+    div.addEventListener("mousedown", setDivBackgroundColor);
+  });
+  
+}
+setEraserListener();
+
+// ^^^^ Eraser ^^^^
 
 createGrid(16);
 setGridSizeButtonsListeners();

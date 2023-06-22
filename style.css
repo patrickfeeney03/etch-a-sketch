@@ -144,3 +144,17 @@ body {
 );
 }
 /* ^^^^^ Button Colors ^^^^^ */
+
+
+#eraser-container {
+  margin: 25px 0 0 0;
+  align-items: end;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+  row-gap: 25px;
+}
+#eraser {
+  width: 90px;
+  grid-column: 3;
+}
