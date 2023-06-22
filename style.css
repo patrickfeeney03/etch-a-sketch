@@ -20,6 +20,16 @@ body {
   justify-content: center;
 }
 
+.large-title {
+  font-family: "Square";
+  font-size: 100px;
+  margin: 0;
+}
+
+#main-title {
+  margin: 20px 0 20px 0;
+}
+
 .flex-row {
   display: flex;
   flex-direction: row;
