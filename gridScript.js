@@ -92,7 +92,6 @@ function makeDarkerByPercentage(change, element) {
 
 // vvvv Color Painting vvvv
 function setColorsListeners() {
-  
   let colorButtons = document.querySelectorAll(".color-button");
   colorButtons.forEach((singleColorButton) => {
     singleColorButton.addEventListener("click", myHandler);
@@ -110,28 +109,47 @@ function myHandler(e) {
   removeDarkening();
   let color = e.target.getAttribute("data-color");
   console.log(color);
-  // vvvv Adding new listeners to grid divs vvvv
+  // Adding new listeners to grid divs
   let divs = document.querySelectorAll(".col-div");
   divs.forEach((div) => {
-    div.myColor = color; // Add the pressed color to the divs to be used in listeners funct
-    div.addEventListener("mouseenter", paintDiv);
+    // Add the pressed color to the divs to be used in listeners funct
+    div.myColor = color;
+
+    // vvvv Painting triggering from mouse input vvvv
+
+    //div.addEventListener("mousemove", setDivBackgroundColor);
+    //div.addEventListener("mouseenter", setDivBackgroundColor);
+    //div.addEventListener("click", setDivBackgroundColor);
+    div.addEventListener("mousedown", setDivBackgroundColor);
+    // ^^^^ Painting triggering from mouse input ^^^^
   });
 }
 
-function paintDiv(event) {
-  let singleDivElement = event.currentTarget;
-  let color = singleDivElement.myColor;
-  singleDivElement.style.backgroundColor = color;
-  
-  
+function setDivBackgroundColor(event) {
+  let triggeringDiv = event.currentTarget;
+  triggeringDiv.style.backgroundColor = triggeringDiv.myColor;
+  //console.log(event.currentTarget); // Element that triggered
+  let allDivs = document.querySelectorAll(".col-div");
+  allDivs.forEach((div) => {
+    div.addEventListener("mouseenter", onlySetBackground);
+  })
+  /*
+  if (event.buttons === 1 || event.type === "click") {
+    let singleDivElement = event.currentTarget;
+    let colorForBackground = singleDivElement.myColor;
+    singleDivElement.style.backgroundColor = colorForBackground;
+  }
+  */
 }
 
-function removeListener() {
-  let elements = document.querySelectorAll(".color-button");
-  elements.forEach((element) => {
-    element.removeEventListener("click", myHandler);
-  })
+function onlySetBackground(event) {
+  if (event.buttons === 1) {
+    let singleDivElement = event.currentTarget;
+    let colorForBackground = singleDivElement.myColor;
+    singleDivElement.style.backgroundColor = colorForBackground;
+  }
 }
+
 
 // ^^^^ Color Painting ^^^^
 
