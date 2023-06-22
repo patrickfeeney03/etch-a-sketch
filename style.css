@@ -178,3 +178,35 @@ body {
   width: 75px;
   grid-column: 3;
 }
+
+#shadow-title {
+  margin: 20px auto auto auto;
+}
+
+#shadow-buttons-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+  row-gap: 25px;
+}
+
+.shadow-button {
+  border: none;
+  width: 50px;
+  height: 50px;
+  box-shadow: 6px 8px #999;
+  font-size: 20px;
+  font-family: "Square";
+}
+
+#button-0 {
+  background-color: #eeeeee;
+}
+
+#button-10 {
+  background-color: #e0dfdf;
+}
+
+#button-20 {
+  background-color: #bbbaba;
+}
