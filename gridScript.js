@@ -1,81 +1,65 @@
+// Grid vvvvvv
 function createGrid(gridResolution) {
   for (let row = 0; row < gridResolution; row++) {
-    //let consoleMessage = `Row:${row}\t`;
-
     const rowDiv = document.createElement("div");
     rowDiv.classList.add("row-div");
-    // Add the CSS class
-
     for (let col = 0; col < gridResolution; col++) {
-      //consoleMessage += `col ${col} `;
-
       const colDiv = document.createElement("div");
       colDiv.classList.add("col-div");
       rowDiv.appendChild(colDiv);
-      // Add the CSS class
     }
-
     let mainGridDiv = document.querySelector(".main-grid-div");
     mainGridDiv.appendChild(rowDiv);
 
-    //console.log(consoleMessage);
-    createClassForDivs(gridResolution, 768);
+    setDivsStyle(gridResolution, 768);
   }
 }
+function clearGrid() {
+  let mainGridDiv = document.querySelector(".main-grid-div");
+  mainGridDiv.innerHTML = "";
+}
+// Grid ^^^^^^^
 
-createGrid(16);
-createEventListenersForGridSizeButtons();
-createEventListenersForDivsDarkening();
+// Grid Sizing vvvv
+function setGridSizeButtonsListeners() {
+  let buttons = document.querySelectorAll(".grid-size-button");
+  buttons.forEach(button => {
+    button.addEventListener("click", function () {
+      clearGrid();
+      createGrid(Number(button.getAttribute("data-key")));
+      createEventListenersForDivsDarkening();
+    });
+  });
+}
+// Grid Sizing ^^^^
 
-
-function createClassForDivs(amountDivs, canvasSize) {
+function setDivsStyle(amountDivs, canvasSize) {
   let allColDivs = document.querySelectorAll(".col-div");
   let size = canvasSize / amountDivs;
-  //console.log(size);
   allColDivs.forEach(coldiv => {
-    //console.log(coldiv);
     coldiv.style.backgroundColor = "#E7CEA6";
     coldiv.style.width = `${size}px`;
     coldiv.style.height = `${size}px`;
   });
 }
 
+/* Darkerning vvvvvvvvvvvvv */
 function createEventListenersForDivsDarkening() {
   let allColDivs = document.querySelectorAll(".col-div");
   allColDivs.forEach(div => {
     div.addEventListener("mouseenter", handler);
-
-    
   });
 }
-function handler(e) {
-      let elem = e.target
-      makeDarkerByPercentage(0.1, elem);
-    }
 function removeDarkening() {
   let allColDivs = document.querySelectorAll(".col-div");
   allColDivs.forEach(div => {
     div.removeEventListener("mouseenter", handler);
   })
 }
-
-function createEventListenersForGridSizeButtons() {
-  let buttons = document.querySelectorAll(".grid-size-button");
-  buttons.forEach(button => {
-    button.addEventListener("click", function () {
-      clearGrid();
-      createGrid(Number(button.getAttribute("data-key")));
-      console.log(button.getAttribute("data-key"));
-      createEventListenersForDivsDarkening();
-    });
-  });
+function handler(e) {
+  let elem = e.target
+  makeDarkerByPercentage(0.1, elem);
 }
-
-function clearGrid() {
-  let mainGridDiv = document.querySelector(".main-grid-div");
-  mainGridDiv.innerHTML = "";
-}
-
 function makeDarkerByPercentage(change, element) {
   let elementFilters = window.getComputedStyle(element).getPropertyValue("filter");
   let elementFiltersArray = elementFilters.split(" ");
@@ -96,18 +80,50 @@ function makeDarkerByPercentage(change, element) {
     element.style.filter = `brightness(${intValueBrightness - change})`;
   }
 }
+/* Darkening ^^^^^^^^^^^^^^^^^^^^^ */
 
-function createEventListenerForColourButtons() {
-  let elements = document.querySelectorAll(".color-button");
-  elements.forEach((element) => {
-    element.addEventListener("click", myHandler);
+
+
+
+
+
+
+
+
+// vvvv Color Painting vvvv
+function setColorsListeners() {
+  
+  let colorButtons = document.querySelectorAll(".color-button");
+  colorButtons.forEach((singleColorButton) => {
+    singleColorButton.addEventListener("click", myHandler);
   });
 }
 
+function removeColorsListeners() {
+  let elements = document.querySelectorAll(".color-button");
+  elements.forEach((element) => {
+    element.removeEventListener("click", myHandler);
+  });
+}
 
 function myHandler(e) {
-  console.log(e.target);
+  removeDarkening();
+  let color = e.target.getAttribute("data-color");
+  console.log(color);
+  // vvvv Adding new listeners to grid divs vvvv
+  let divs = document.querySelectorAll(".col-div");
+  divs.forEach((div) => {
+    div.myColor = color; // Add the pressed color to the divs to be used in listeners funct
+    div.addEventListener("mouseenter", paintDiv);
+  });
+}
 
+function paintDiv(event) {
+  let singleDivElement = event.currentTarget;
+  let color = singleDivElement.myColor;
+  singleDivElement.style.backgroundColor = color;
+  
+  
 }
 
 function removeListener() {
@@ -117,4 +133,9 @@ function removeListener() {
   })
 }
 
-createEventListenerForColourButtons();
+// ^^^^ Color Painting ^^^^
+
+createGrid(16);
+setGridSizeButtonsListeners();
+createEventListenersForDivsDarkening();
+setColorsListeners();
