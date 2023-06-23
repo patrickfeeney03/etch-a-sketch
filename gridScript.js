@@ -72,7 +72,74 @@ function shadowHandler(event) {
   divs.forEach((div) => {
     div.change = buttonChange;
     div.addEventListener("mousedown", handler);
+    // Make sure that this listener gets deleted when another button is pressed?
   });
+}
+
+function handler(e) {
+  let elem = e.currentTarget;
+  let resetBrightnessValue = "0";
+  let divs = document.querySelectorAll(".col-div");
+  let myBody = document.querySelector("body");
+  if (elem.change === resetBrightnessValue) {
+    resetBrightness(e);
+    divs.forEach((div) => {
+      div.addEventListener("mouseenter", resetBrightness);
+    });
+    myBody.addEventListener("mouseup", () => {
+      divs.forEach((div) => {
+        div.removeEventListener("mouseenter", resetBrightness);
+      });
+    });
+  } else {
+    makeDarkerByPercentage(e);
+    divs.forEach((div) => {
+      div.addEventListener("mouseenter", makeDarkerByPercentage);
+    });
+    myBody.addEventListener("mouseup", () => {
+      divs.forEach((div) => {
+        div.removeEventListener("mouseenter", makeDarkerByPercentage);
+      });
+    });
+  }
+
+
+
+}
+
+
+function removeDarkening() {
+  let allColDivs = document.querySelectorAll(".col-div");
+  allColDivs.forEach(div => {
+    div.removeEventListener("mousedown", handler);
+  })
+}
+
+function makeDarkerByPercentage(event) {
+  event.preventDefault();
+  let divElement = event.currentTarget;
+  let intChange = +divElement.change;
+
+  let elementFilters = window.getComputedStyle(divElement).getPropertyValue("filter");
+  let elementFiltersArray = elementFilters.split(" ");
+  let intValueBrightness = 1;
+  if (elementFilters != "none") {
+    console.log("Ran if");
+    for (let i = 0; i < elementFiltersArray.length; i++) {
+      if (elementFiltersArray[i].includes("brightness")) {
+        intValueBrightness = +elementFiltersArray[i].split("(")[1].split(")")[0];
+        elementFiltersArray.splice(i, 1);
+      }
+    }
+    let appendingMessage = ` brightness(${intValueBrightness + intChange})`;
+    let convertArrayToString = elementFiltersArray.join(" ");
+    let finalString = convertArrayToString + appendingMessage;
+    divElement.style.filter = finalString;
+    console.log(`New brightness: ${finalString}`);
+  } else {
+    divElement.style.filter = `brightness(${intValueBrightness + intChange})`;
+    console.log(`New brightness: ${intValueBrightness + intChange}`);
+  }
 }
 
 function resetBrightness(event) {
@@ -93,60 +160,7 @@ function resetBrightness(event) {
   }
 }
 
-/*
-function createEventListenersForDivsDarkening() {
-  let allColDivs = document.querySelectorAll(".col-div");
-  allColDivs.forEach(div => {
-    div.addEventListener("mouseenter", handler);
-  });
-}*/
-function removeDarkening() {
-  let allColDivs = document.querySelectorAll(".col-div");
-  allColDivs.forEach(div => {
-    div.removeEventListener("mouseenter", handler);
-  })
-}
 
-function makeDarkerByPercentage(event) {
-  event.preventDefault();
-  let divElement = event.currentTarget;
-  let intChange = +divElement.change;
-
-  let elementFilters = window.getComputedStyle(divElement).getPropertyValue("filter");
-  let elementFiltersArray = elementFilters.split(" ");
-  let intValueBrightness = 1;
-  if (elementFilters != "none") {
-    console.log("Ran if");
-    for (let i = 0; i < elementFiltersArray.length; i++) {
-      if (elementFiltersArray[i].includes("brightness")) {
-        // Element has already been modified.
-        intValueBrightness = +elementFiltersArray[i].split("(")[1].split(")")[0];
-        elementFiltersArray.splice(i, 1);
-      }
-    }
-    let appendingMessage = ` brightness(${intValueBrightness + intChange})`;
-    let convertArrayToString = elementFiltersArray.join(" ");
-    let finalString = convertArrayToString + appendingMessage;
-    divElement.style.filter = finalString;
-    console.log(`New brightness: ${finalString}`);
-  } else {
-    //console.log("Ran else");
-    divElement.style.filter = `brightness(${intValueBrightness + intChange})`;
-    console.log(`New brightness: ${intValueBrightness + intChange}`);
-  }
-}
-
-
-
-function handler(e) {
-  let elem = e.currentTarget;
-  let resetBrightnessValue = "0";
-  if (elem.change === resetBrightnessValue) {
-    resetBrightness(e);
-  } else {
-    makeDarkerByPercentage(e);
-  }
-}
 // ^^^^ Div Shadowing ^^^^
 
 // vvvv Color Painting vvvv
@@ -159,6 +173,7 @@ function setColorsListeners() {
   eraser.addEventListener("click", myHandler);
 }
 
+// This function is unnecessary
 function removeColorsListeners() {
   let elements = document.querySelectorAll(".color-button");
   elements.forEach((element) => {
@@ -169,7 +184,7 @@ function removeColorsListeners() {
 function myHandler(e) {
   removeDarkening();
   let color = e.target.getAttribute("data-color");
-  console.log(color); // Color that has been chosen
+  console.log(color);
   let divs = document.querySelectorAll(".col-div");
   // Configure the function that will get called when a div is clicked
   divs.forEach((div) => {
