@@ -195,8 +195,18 @@ body {
   width: 50px;
   height: 50px;
   box-shadow: 6px 8px #999;
-  font-size: 20px;
+  font-size: 18px;
   font-family: "Square";
+  text-align: center;
+}
+
+.shadow-button:hover {
+  filter: brightness(0.8);
+}
+
+.shadow-button:active {
+  box-shadow: 6px 4px #666;
+  transform: translateY(4px);
 }
 
 #button-0 {

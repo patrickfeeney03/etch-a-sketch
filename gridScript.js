@@ -33,6 +33,7 @@ function setGridSizeButtonsListeners() {
 }
 // Grid Sizing ^^^^
 
+// vvvv Grid Styling vvvv
 function setDivsStyle(amountDivs, canvasSize) {
   let allColDivs = document.querySelectorAll(".col-div");
   let size = canvasSize / amountDivs;
@@ -42,14 +43,45 @@ function setDivsStyle(amountDivs, canvasSize) {
     coldiv.style.height = `${size}px`;
   });
 }
+// ^^^^ Grid Styling ^^^^
 
-/* Darkerning vvvvvvvvvvvvv */
+// vvvv Div Shadowing vvvv
+
+/* 
+- The makeDarkerByPercentage function works fine, don't touch it.
+- Add event listeners for the 3 buttons.
+- Set event listeners for grid divs when any of the 3 buttons are pressed.
+- Only modify grid when clicking, and keeping the click down. Not when hovering.
+  * Do the as with the color painting
+- Make sure to remove all unnecessary listeners once the user clicks on another shadowing
+  button or a color/eraser button
+*/
+
+function setListenersForShadowButtons() {
+  let shadowButtons = document.querySelectorAll(".shadow-button");
+  shadowButtons.forEach((button) => {
+    button.addEventListener("mousedown", shadowHandler);
+  });
+}
+
+function shadowHandler(event) {
+  let triggeringButton = event.target
+  let buttonChange = triggeringButton.getAttribute("data-brightnessChange");
+  // Run function to remove painting and all other listeners that are attached to the col-div's
+  let divs = document.querySelectorAll(".col-div");
+  divs.forEach((div) => {
+    div.change = buttonChange;
+    div.addEventListener("mousedown", makeDarkerByPercentage);
+  });   
+}
+
+/*
 function createEventListenersForDivsDarkening() {
   let allColDivs = document.querySelectorAll(".col-div");
   allColDivs.forEach(div => {
     div.addEventListener("mouseenter", handler);
   });
-}
+}*/
 function removeDarkening() {
   let allColDivs = document.querySelectorAll(".col-div");
   allColDivs.forEach(div => {
@@ -60,35 +92,33 @@ function handler(e) {
   let elem = e.target
   makeDarkerByPercentage(0.1, elem);
 }
-function makeDarkerByPercentage(change, element) {
-  let elementFilters = window.getComputedStyle(element).getPropertyValue("filter");
+function makeDarkerByPercentage(event) {
+  let divElement = event.currentTarget;
+  let intChange = +divElement.change;
+
+  let elementFilters = window.getComputedStyle(divElement).getPropertyValue("filter");
   let elementFiltersArray = elementFilters.split(" ");
   let intValueBrightness = 1;
   if (elementFilters != "none") {
+    console.log("Ran if");
     for (let i = 0; i < elementFiltersArray.length; i++) {
       if (elementFiltersArray[i].includes("brightness")) {
         // Element has already been modified.
-        intValueBrightness = elementFiltersArray[i].split("(")[1].split(")")[0];
+        intValueBrightness = +elementFiltersArray[i].split("(")[1].split(")")[0];
         elementFiltersArray.splice(i, 1);
       }
     }
-    let appendingMessage = ` brightness(${intValueBrightness - change})`;
+    let appendingMessage = ` brightness(${intValueBrightness + intChange})`;
     let convertArrayToString = elementFiltersArray.join(" ");
     let finalString = convertArrayToString + appendingMessage;
-    element.style.filter = finalString;
+    divElement.style.filter = finalString;
+    console.log(finalString);
   } else {
-    element.style.filter = `brightness(${intValueBrightness - change})`;
+    console.log("Ran else");
+    divElement.style.filter = `brightness(${intValueBrightness + intChange})`;
   }
 }
-/* Darkening ^^^^^^^^^^^^^^^^^^^^^ */
-
-
-
-
-
-
-
-
+// ^^^^ Div Shadowing ^^^^
 
 // vvvv Color Painting vvvv
 function setColorsListeners() {
@@ -117,7 +147,6 @@ function myHandler(e) {
     div.myColor = color;
     // vvvv Painting triggering from mouse input vvvv
     div.addEventListener("mousedown", setDivBackgroundColor);
-    //div.addEventListener("mouseup", removeMouseMovementListeners);
     // ^^^^ Painting triggering from mouse input ^^^^
   });
   let mainBody = document.querySelector("body");
@@ -126,7 +155,7 @@ function myHandler(e) {
 
 function checkIfListenersAreOff(e) {
   if (e.buttons != 1) {
-    removeColorsListeners, removeMouseMovementListeners();
+    removeMouseMovementListeners();
   }
 }
 
@@ -183,5 +212,5 @@ setEraserListener();
 
 createGrid(16);
 setGridSizeButtonsListeners();
-createEventListenersForDivsDarkening();
-setColorsListeners();
+//createEventListenersForDivsDarkening();
+//setColorsListeners();
