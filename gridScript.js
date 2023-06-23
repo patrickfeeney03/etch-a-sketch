@@ -71,8 +71,26 @@ function shadowHandler(event) {
   let divs = document.querySelectorAll(".col-div");
   divs.forEach((div) => {
     div.change = buttonChange;
-    div.addEventListener("mousedown", makeDarkerByPercentage);
-  });   
+    div.addEventListener("mousedown", handler);
+  });
+}
+
+function resetBrightness(event) {
+  let divElement = event.currentTarget;
+  let currentElementFilters = window.getComputedStyle(divElement).getPropertyValue("filter");
+  let currentElementFiltersArray = currentElementFilters.split(" ");
+  if (currentElementFilters != "none") {
+    for (let i = 0; i < currentElementFiltersArray.length; i++) {
+      if (currentElementFiltersArray[i].includes("brightness")) {
+        currentElementFiltersArray.splice(i, 1);
+      }
+    }
+    let appendingMessage = ` brightness(${1})`;
+    let convertArrayToString = currentElementFiltersArray.join(" ");
+    let finalString = convertArrayToString + appendingMessage;
+    divElement.style.filter = finalString;
+    console.log(finalString);
+  }
 }
 
 /*
@@ -88,10 +106,7 @@ function removeDarkening() {
     div.removeEventListener("mouseenter", handler);
   })
 }
-function handler(e) {
-  let elem = e.target
-  makeDarkerByPercentage(0.1, elem);
-}
+
 function makeDarkerByPercentage(event) {
   event.preventDefault();
   let divElement = event.currentTarget;
@@ -113,10 +128,23 @@ function makeDarkerByPercentage(event) {
     let convertArrayToString = elementFiltersArray.join(" ");
     let finalString = convertArrayToString + appendingMessage;
     divElement.style.filter = finalString;
-    console.log(finalString);
+    console.log(`New brightness: ${finalString}`);
   } else {
-    console.log("Ran else");
+    //console.log("Ran else");
     divElement.style.filter = `brightness(${intValueBrightness + intChange})`;
+    console.log(`New brightness: ${intValueBrightness + intChange}`);
+  }
+}
+
+
+
+function handler(e) {
+  let elem = e.currentTarget;
+  let resetBrightnessValue = "0";
+  if (elem.change === resetBrightnessValue) {
+    resetBrightness(e);
+  } else {
+    makeDarkerByPercentage(e);
   }
 }
 // ^^^^ Div Shadowing ^^^^
@@ -144,7 +172,7 @@ function myHandler(e) {
   console.log(color); // Color that has been chosen
   let divs = document.querySelectorAll(".col-div");
   // Configure the function that will get called when a div is clicked
-  divs.forEach((div) => { 
+  divs.forEach((div) => {
     div.myColor = color;
     // vvvv Painting triggering from mouse input vvvv
     div.addEventListener("mousedown", setDivBackgroundColor);
