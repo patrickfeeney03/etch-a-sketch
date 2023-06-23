@@ -27,7 +27,6 @@ function setGridSizeButtonsListeners() {
     button.addEventListener("click", function () {
       clearGrid();
       createGrid(Number(button.getAttribute("data-key")));
-      createEventListenersForDivsDarkening();
     });
   });
 }
@@ -48,11 +47,6 @@ function setDivsStyle(amountDivs, canvasSize) {
 // vvvv Div Shadowing vvvv
 
 /* 
-- The makeDarkerByPercentage function works fine, don't touch it.
-- Add event listeners for the 3 buttons.
-- Set event listeners for grid divs when any of the 3 buttons are pressed.
-- Only modify grid when clicking, and keeping the click down. Not when hovering.
-  * Do the as with the color painting
 - Make sure to remove all unnecessary listeners once the user clicks on another shadowing
   button or a color/eraser button
 */
@@ -65,6 +59,8 @@ function setListenersForShadowButtons() {
 }
 
 function shadowHandler(event) {
+  removeColoring();
+  // Remove color listeners here
   let triggeringButton = event.target
   let buttonChange = triggeringButton.getAttribute("data-brightnessChange");
   // Run function to remove painting and all other listeners that are attached to the col-div's
@@ -102,17 +98,13 @@ function handler(e) {
       });
     });
   }
-
-
-
 }
-
 
 function removeDarkening() {
   let allColDivs = document.querySelectorAll(".col-div");
   allColDivs.forEach(div => {
     div.removeEventListener("mousedown", handler);
-  })
+  });
 }
 
 function makeDarkerByPercentage(event) {
@@ -173,14 +165,6 @@ function setColorsListeners() {
   eraser.addEventListener("click", myHandler);
 }
 
-// This function is unnecessary
-function removeColorsListeners() {
-  let elements = document.querySelectorAll(".color-button");
-  elements.forEach((element) => {
-    element.removeEventListener("click", myHandler);
-  });
-}
-
 function myHandler(e) {
   removeDarkening();
   let color = e.target.getAttribute("data-color");
@@ -201,6 +185,13 @@ function checkIfListenersAreOff(e) {
   if (e.buttons != 1) {
     removeMouseMovementListeners();
   }
+}
+
+function removeColoring() {
+  let allDivs = document.querySelectorAll(".col-div");
+  allDivs.forEach((div) => {
+    div.removeEventListener("mousedown", setDivBackgroundColor);
+  })
 }
 
 function setDivBackgroundColor(event) {
@@ -239,7 +230,7 @@ function removeMouseMovementListeners() {
 // vvvv Eraser vvvv
 /*
 function setEraserListener() {
-  removeDarkening();
+  removeDarening();
   let eraserElement = document.querySelector("#eraser");
   let color = eraserElement.getAttribute("data-color");
 
@@ -257,4 +248,5 @@ setEraserListener();
 createGrid(16);
 setGridSizeButtonsListeners();
 //createEventListenersForDivsDarkening();
-//setColorsListeners();
+setColorsListeners();
+setListenersForShadowButtons();
