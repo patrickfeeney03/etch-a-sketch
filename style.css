@@ -209,14 +209,20 @@ body {
   transform: translateY(4px);
 }
 
-#button-0 {
-  background-color: #eeeeee;
-}
-
-#button-10 {
-  background-color: #e0dfdf;
-}
-
-#button-20 {
+#button-minus-10 {
+  
   background-color: #bbbaba;
+}
+
+#button-reset {
+  background-color: #e0dfdf;
+  background-image: url(./assets/reset.svg);
+  background-size: 26px;
+  background-repeat: no-repeat;
+  background-position: center;
+  
+}
+
+#button-plus-10 {
+  background-color: #eeeeee;
 }

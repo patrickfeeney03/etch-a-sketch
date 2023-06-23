@@ -93,6 +93,7 @@ function handler(e) {
   makeDarkerByPercentage(0.1, elem);
 }
 function makeDarkerByPercentage(event) {
+  event.preventDefault();
   let divElement = event.currentTarget;
   let intChange = +divElement.change;
 
