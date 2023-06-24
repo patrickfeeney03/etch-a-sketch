@@ -144,7 +144,7 @@ function resetBrightness(event) {
         currentElementFiltersArray.splice(i, 1);
       }
     }
-    let appendingMessage = ` brightness(${1})`;
+    let appendingMessage = ` brightness(1)`;
     let convertArrayToString = currentElementFiltersArray.join(" ");
     let finalString = convertArrayToString + appendingMessage;
     divElement.style.filter = finalString;
@@ -255,28 +255,27 @@ function removeMouseMovementListeners() {
 
 // ^^^^ Color Painting ^^^^
 
+// vvvv Clear Button ^^^^
 
-
-// vvvv Eraser vvvv
-/*
-function setEraserListener() {
-  removeDarening();
-  let eraserElement = document.querySelector("#eraser");
-  let color = eraserElement.getAttribute("data-color");
-
-  let divs = document.querySelectorAll(".col-div");
-  divs.forEach((div) => {
-    div.myColor = color;
-    div.addEventListener("mousedown", setDivBackgroundColor);
+function addClearButtonListener() {
+  let clearButton = document.querySelector("#clear-button");
+  clearButton.addEventListener("click", () => {
+    clearDivs();
   });
-  
 }
-setEraserListener();
-*/
-// ^^^^ Eraser ^^^^
+
+function clearDivs() {
+  let allDivs = document.querySelectorAll(".col-div");
+  allDivs.forEach((div) => {
+    div.style.backgroundColor = "#E7CEA6";
+    div.style.filter = "";
+  });
+}
+
+// ^^^^ Clear Button ^^^^
 
 createGrid(16);
 setGridSizeButtonsListeners();
-//createEventListenersForDivsDarkening();
 setColorsListeners();
 setListenersForShadowButtons();
+addClearButtonListener();
