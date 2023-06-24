@@ -197,19 +197,49 @@ function removeColoring() {
 function setDivBackgroundColor(event) {
   event.preventDefault();
   console.log(`Adding mouseenter listeners`);
+  color = getColorFromDiv(event);
   let triggeringDiv = event.currentTarget;
-  triggeringDiv.style.backgroundColor = triggeringDiv.myColor;
+  triggeringDiv.style.backgroundColor = color;
   let allDivs = document.querySelectorAll(".col-div");
   allDivs.forEach((div) => {
     div.addEventListener("mouseenter", onlySetBackground);
   });
 }
+function getColorFromDiv(event) {
+  let triggeredDivElement = event.currentTarget;
+  let colorAssignedToDiv = triggeredDivElement.myColor;
+  if (colorAssignedToDiv === "rainbow") {
+    return generateRandomHexColor()
+  } else {
+    return colorAssignedToDiv;
+  }
+}
+
+function generateRandomHexColor() {
+  let rColor = randomColor(0);
+  console.log(rColor);
+  return rColor
+}
+
+// vvvv David Mihal's Function vvvv
+function randomColor(brightness){
+  function randomChannel(brightness){
+    var r = 255-brightness;
+    var n = 0|((Math.random() * r) + brightness);
+    var s = n.toString(16);
+    return (s.length==1) ? '0'+s : s;
+  }
+  return '#' + randomChannel(brightness) + randomChannel(brightness) + randomChannel(brightness);
+}
+// ^^^^ David Mihal's Function ^^^^
+
 
 function onlySetBackground(event) {
   //console.log("a");
   if (true) {
     let singleDivElement = event.currentTarget;
-    let colorForBackground = singleDivElement.myColor;
+    //let colorForBackground = singleDivElement.myColor;
+    let colorForBackground = getColorFromDiv(event);
     singleDivElement.style.backgroundColor = colorForBackground;
   }
 }
