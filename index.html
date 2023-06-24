@@ -19,13 +19,18 @@
   <div class="flex-row" id="middle-container">
 
     <div class="flex-col box" id="left-col">
-      <div id="left-sub-col">
-        <p class="small-title">Set Size</p>
-        <div class="flex-col" id="set-size-buttons-container">
-          <button class="grid-size-button" data-key="8">8 x 8</button>
-          <button class="grid-size-button" data-key="16">16 x 16</button>
-          <button class="grid-size-button" data-key="32">32 x 32</button>
+      <div class="flex-col" id="left-sub-col">
+        <div>
+          <p class="small-title">Set Size</p>
+          <div class="flex-col" id="set-size-buttons-container">
+            <button class="grid-size-button" data-key="8">8 x 8</button>
+            <button class="grid-size-button" data-key="16">16 x 16</button>
+            <button class="grid-size-button" data-key="32">32 x 32</button>
+          </div>          
         </div>
+        <div>
+          <button id="clear-button">Clear</button>
+        </div>        
       </div>
     </div>
 
@@ -33,33 +38,33 @@
     </div>
 
     <div class="flex-col box" id="right-col">
-      <div id="right-sub-col">
-        <p class="small-title">Choose Color</p>
-        <div id="color-buttons-container">
-          <button class="color-button" id="color-red" data-color="red"></button>
-          <button class="color-button" id="color-blue" data-color="blue"></button>
-          <button class="color-button" id="color-yellow" data-color="yellow"></button>
-          <button class="color-button" id="color-orange" data-color="orange"></button>
-          <button class="color-button" id="color-black" data-color="black"></button>
-          <button class="color-button" id="color-rainbow" data-color="rainbow"></button>
+      <div class="flex-col" id="right-sub-col">
+        <div>
+          <p class="small-title">Choose Color</p>
+          <div id="color-buttons-container">
+            <button class="color-button" id="color-red" data-color="red"></button>
+            <button class="color-button" id="color-blue" data-color="blue"></button>
+            <button class="color-button" id="color-yellow" data-color="yellow"></button>
+            <button class="color-button" id="color-orange" data-color="orange"></button>
+            <button class="color-button" id="color-black" data-color="black"></button>
+            <button class="color-button" id="color-rainbow" data-color="rainbow"></button>
+          </div>
+          <div class="flex-col" id="eraser-container">
+            <img src="./assets/eraser.svg" id="eraser" data-color="#e7cea6">
+          </div>
         </div>
-        <div class="flex-col" id="eraser-container">
-          <img src="./assets/eraser.svg" id="eraser" data-color="#e7cea6">
-        </div>        
-      </div>
-      <div id="right-sub-col2">
-        <p class="small-title" id="shadow-title">Brightness Tool</p>
-        <div id="shadow-buttons-container">
-          <button class="shadow-button" id="button-minus-10" data-brightnessChange="-0.1">-10%</button>
-          <button class="shadow-button" id="button-reset" data-brightnessChange="0"></button>
-          <button class="shadow-button" id="button-plus-10" data-brightnessChange="0.1">+10%</button>
+        
+        <div>
+          <p class="small-title" id="shadow-title">Brightness Tool</p>
+          <div id="shadow-buttons-container">
+            <button class="shadow-button" id="button-minus-10" data-brightnessChange="-0.1">-10%</button>
+            <button class="shadow-button" id="button-reset" data-brightnessChange="0"></button>
+            <button class="shadow-button" id="button-plus-10" data-brightnessChange="0.1">+10%</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
-
-
 </body>
 
 <script src="./gridScript.js"></script>
