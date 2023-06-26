@@ -82,6 +82,7 @@ button:active {
   justify-content: start;
   align-items: end;
   height: 100%;
+  max-height: 576px;
 }
 
 #left-sub-col {
@@ -194,6 +195,18 @@ button:active {
 #eraser {
   width: 75px;
   grid-column: 3;
+  filter: drop-shadow(6px 6px 0px #999);
+  cursor: pointer;
+}
+
+#eraser:hover {
+  filter: drop-shadow(6px 6px 0px #999) brightness(0.8);  
+  
+}
+
+#eraser:active {
+  transform: translateY(3px);
+  filter: drop-shadow(6px 3px 0px #666) brightness(0.8);  
 }
 
 #shadow-title {
@@ -222,7 +235,6 @@ button:active {
 }
 
 .shadow-button:active {
-  box-shadow: 6px 4px #666;
   transform: translateY(4px);
 }
 
@@ -243,32 +255,29 @@ button:active {
 }
 
 #clear-button {
+  margin: auto auto 8px auto;
   font-size: 40px;
   font-family: "Square";
 }
 
 #middle-buttons-container {
   justify-content: space-between;
-  margin: 10px 10px auto 10px;
+  margin: 10px 20px auto 20px;
 }
 
 .link-buttons {
   font-family: "Square";
   font-size: 26px;
   background-color: rgb(239, 239, 239);
-  padding: 1px 6px 1px 6px;
   color: rgb(0, 0, 0);
   text-decoration: none;
   box-shadow: 6px 8px #999;
   cursor: pointer;
 }
 
-#github-svg {
-  //margin-top: 2x;
-}
-
 .link-buttons div {
   align-items: center;
+  padding: 1px 6px 1px 6px;
 }
 .link-buttons .flex-row p {
   padding-top: 2px;
@@ -281,7 +290,7 @@ button:active {
 
 .link-buttons:active {
   transform: translateY(4px);
-  box-shadow: 6px 4px #999;
+  box-shadow: 6px 4px #666;
 }
 
 #help-popup-container {
