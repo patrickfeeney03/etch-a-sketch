@@ -23,6 +23,7 @@ body {
 button {
   border: none;
   box-shadow: 6px 8px #999;
+  cursor: pointer;
 }
 
 button:hover {
@@ -244,4 +245,39 @@ button:active {
 #clear-button {
   font-size: 40px;
   font-family: "Square";
+}
+
+#middle-buttons-container {
+  justify-content: space-between;
+  margin: 10px 10px auto 10px;
+}
+
+.link-buttons {
+  font-family: "Square";
+  font-size: 26px;
+}
+
+#help-popup-container {
+  width: 400px;
+  background-color: #e0dfdf;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  /*transform: translate(-50%, -50%); */
+  transform: translate(-50%, -50%) scale(0.1);
+  text-align: center;
+  padding: 30px;
+  visibility: hidden;
+  transition: transform 0.2s;
+}
+
+#help-popup-container.open-popup {
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.open-popup button {
+  font-family: "Square";
+  font-size: 26px;
 }

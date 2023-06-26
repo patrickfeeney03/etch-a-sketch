@@ -9,9 +9,6 @@
 </head>
 
 <body>
-  <!--
-    <button class="grid-amount-prompt">Set Grid Size</button>
-    -->
   <div class="header">
     <h1 class="large-title" id="main-title">My Etch A Sketch</h1>
   </div>
@@ -35,9 +32,28 @@
     </div>
 
     <div class="box" id="main-grid-div-container">
-      <div id="main-grid-div">
+      <div>
+        <div id="main-grid-div">
+
+        </div>
+        <div class="flex-row" id="middle-buttons-container">
+          <button class="link-buttons" id="help-button">Help</button>
+
+          <div id="help-popup-container">
+            <p class="small-title">How to use</p>
+            <p class="normal-text">Choose a color from the right column, under the 'Choose Color' title. Then just draw on the grid.</p>
+            <p class="normal-text">The Brightness Tool can be used to modify the brightness value of the grid squares.</p>
+            <p class="normal-text">The size of the grid can be set by clicking the 'Set Size' buttons under the 'Set Size' title.</p>
+            <p class="normal-text">To clear the grid simply click on the 'Clear' button.</p>
+            <button id="close-button">Close</button>
+          </div>
+          <a href="https://www.google.com" class="link-buttons">GitHub</a>
+          
+          
+        </div>
 
       </div>
+      
     </div>
 
     <div class="flex-col box" id="right-col">

@@ -274,8 +274,26 @@ function clearDivs() {
 
 // ^^^^ Clear Button ^^^^
 
+// vvvv Help Button vvvv
+
+function setHelpButtonListeners() {
+  let helpButton = document.querySelector("#help-button");
+  let closeButton = document.querySelector("#close-button");
+  helpButton.addEventListener("click", helpButtonHandler);
+  closeButton.addEventListener("click", helpButtonHandler);
+}
+
+function helpButtonHandler(event) {
+  let divContainer = document.querySelector("#help-popup-container");
+  divContainer.classList.toggle("open-popup");
+}
+
+
+// ^^^^ Help Button ^^^^
+
 createGrid(16);
 setGridSizeButtonsListeners();
 setColorsListeners();
 setListenersForShadowButtons();
 addClearButtonListener();
+setHelpButtonListeners();
