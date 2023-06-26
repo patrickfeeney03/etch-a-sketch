@@ -45,12 +45,6 @@ function setDivsStyle(amountDivs, canvasSize) {
 // ^^^^ Grid Styling ^^^^
 
 // vvvv Div Shadowing vvvv
-
-/* 
-- Make sure to remove all unnecessary listeners once the user clicks on another shadowing
-  button or a color/eraser button
-*/
-
 function setListenersForShadowButtons() {
   let shadowButtons = document.querySelectorAll(".shadow-button");
   shadowButtons.forEach((button) => {

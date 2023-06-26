@@ -114,7 +114,7 @@ button:active {
 }
 
 .col-div {
-  border: solid 1px red;
+  border: solid 1px rgb(204, 0, 0);
   box-sizing: border-box;
   width: 10px;
   height: 10px;
