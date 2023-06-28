@@ -82,16 +82,44 @@ function handler(e) {
       });
     });
   } else {
-    makeDarkerByPercentage(e);
+
+    let elemChange = elem.change;
+    changeBackgroundLightnessOfElement(elemChange, elem, e);
+    
     divs.forEach((div) => {
-      div.addEventListener("mouseenter", makeDarkerByPercentage);
+      div.addEventListener("mouseenter", handlerForChangingBackground);
     });
+
     myBody.addEventListener("mouseup", () => {
       divs.forEach((div) => {
-        div.removeEventListener("mouseenter", makeDarkerByPercentage);
+        div.removeEventListener("mouseenter", handlerForChangingBackground);
       });
     });
   }
+}
+
+function handlerForChangingBackground(e) {
+  let div = e.currentTarget;
+  let divChange = div.change;
+  changeBackgroundLightnessOfElement(divChange, div, e);
+}
+
+function changeBackgroundLightnessOfElement(lightnessChange, element, e) {
+  // Check boundaries
+  // If the current Lightness - change is lower than 0, don't proceed
+  // If the current Lightness + change is higher than 100, don't proceed
+  e.preventDefault();
+  let elementColor = window.getComputedStyle(element).getPropertyValue("background-color");
+  let elementRgbIntArray = elementColor.match(/[\d\.]+/g).map(Number);
+  let elementHslColor = rgb2Hsl(elementRgbIntArray[0], elementRgbIntArray[1], elementRgbIntArray[2]);
+  console.log(`Before change: ${elementHslColor}`);
+  elementHslColor[2] = elementHslColor[2] + +lightnessChange;
+  if (elementHslColor[2] < 100 && elementHslColor[2] > 0) {
+    console.log(`After change: ${elementHslColor}`);
+    let formattedHslString = `hsl(${elementHslColor[0]}, ${elementHslColor[1]}%, ${elementHslColor[2]}%)`;
+    element.style.backgroundColor = formattedHslString;
+  }
+  
 }
 
 function removeDarkening() {
@@ -291,3 +319,5 @@ setColorsListeners();
 setListenersForShadowButtons();
 addClearButtonListener();
 setHelpButtonListeners();
+
+

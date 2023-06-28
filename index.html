@@ -72,11 +72,11 @@
         <div>
           <p class="small-title">Choose Color</p>
           <div id="color-buttons-container">
-            <button class="color-button" id="color-red" data-color="red"></button>
-            <button class="color-button" id="color-blue" data-color="blue"></button>
-            <button class="color-button" id="color-yellow" data-color="yellow"></button>
-            <button class="color-button" id="color-orange" data-color="orange"></button>
-            <button class="color-button" id="color-black" data-color="black"></button>
+            <button class="color-button" id="color-red" data-color="rgb(255, 0, 0)"></button>
+            <button class="color-button" id="color-blue" data-color="rgb(0, 0, 255)"></button>
+            <button class="color-button" id="color-yellow" data-color="rgb(255, 255, 0)"></button>
+            <button class="color-button" id="color-orange" data-color="rgb(255, 165, 0)"></button>
+            <button class="color-button" id="color-black" data-color="rgb(0 ,0 ,0)"></button>
             <button class="color-button" id="color-rainbow" data-color="rainbow"></button>
           </div>
           <div class="flex-col" id="eraser-container">
@@ -87,9 +87,9 @@
         <div>
           <p class="small-title" id="shadow-title">Brightness Tool</p>
           <div id="shadow-buttons-container">
-            <button class="shadow-button" id="button-minus-10" data-brightnessChange="-0.1">-10%</button>
+            <button class="shadow-button" id="button-minus-10" data-brightnessChange="-10">-10%</button>
             <button class="shadow-button" id="button-reset" data-brightnessChange="0"></button>
-            <button class="shadow-button" id="button-plus-10" data-brightnessChange="0.1">+10%</button>
+            <button class="shadow-button" id="button-plus-10" data-brightnessChange="10">+10%</button>
           </div>
         </div>
       </div>
@@ -97,6 +97,9 @@
   </div>
 </body>
 
+<script src="https://unpkg.com/@jaxon_song/color-converter/dist/bundle.min.js"></script>
 <script src="./gridScript.js"></script>
+
+
 
 </html>

@@ -149,7 +149,7 @@ button:active {
 }
 
 #color-blue {
-  background-color: blue;
+  background-color: hsl(240, 100%, 50%);
 }
 
 #color-yellow {
@@ -157,7 +157,7 @@ button:active {
 }
 
 #color-orange {
-  background-color: orange;
+  background-color: #ffa500;
 }
 
 #color-black {
