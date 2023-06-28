@@ -37,7 +37,8 @@ function setDivsStyle(amountDivs, canvasSize) {
   let allColDivs = document.querySelectorAll(".col-div");
   let size = canvasSize / amountDivs;
   allColDivs.forEach(coldiv => {
-    coldiv.style.backgroundColor = "#E7CEA6";
+    coldiv.style.backgroundColor = 'rgb(231, 206, 166)';
+    coldiv.originalColor = 'rgb(231, 206, 166)';
     coldiv.style.width = `${size}px`;
     coldiv.style.height = `${size}px`;
   });
@@ -157,23 +158,18 @@ function makeDarkerByPercentage(event) {
 }
 
 function resetBrightness(event) {
+  event.preventDefault();
   let divElement = event.currentTarget;
-  let currentElementFilters = window.getComputedStyle(divElement).getPropertyValue("filter");
-  let currentElementFiltersArray = currentElementFilters.split(" ");
-  if (currentElementFilters != "none") {
-    for (let i = 0; i < currentElementFiltersArray.length; i++) {
-      if (currentElementFiltersArray[i].includes("brightness")) {
-        currentElementFiltersArray.splice(i, 1);
-      }
-    }
-    let appendingMessage = ` brightness(1)`;
-    let convertArrayToString = currentElementFiltersArray.join(" ");
-    let finalString = convertArrayToString + appendingMessage;
-    divElement.style.filter = finalString;
-    console.log(finalString);
-  }
+  divElement.style.backgroundColor = divElement.originalColor;
 }
 
+function getLightnessFromRgbString(rgbString) {
+  // example string "rgb(231, 206, 166)"
+  let numbersFromRgbString = rgbString.match(/[\d\.]+/g);
+  let integerRgbNumbers = numbersFromRgbString.map(Number);
+  let hslIntegerArray = rgb2Hsl(integerRgbNumbers[0], integerRgbNumbers[1], integerRgbNumbers[2]);
+  return hslIntegerArray[2];
+}
 
 // ^^^^ Div Shadowing ^^^^
 
@@ -222,6 +218,7 @@ function setDivBackgroundColor(event) {
   color = getColorFromDiv(event);
   let triggeringDiv = event.currentTarget;
   triggeringDiv.style.backgroundColor = color;
+  triggeringDiv.originalColor = color;
   let allDivs = document.querySelectorAll(".col-div");
   allDivs.forEach((div) => {
     div.addEventListener("mouseenter", onlySetBackground);
@@ -263,6 +260,7 @@ function onlySetBackground(event) {
     //let colorForBackground = singleDivElement.myColor;
     let colorForBackground = getColorFromDiv(event);
     singleDivElement.style.backgroundColor = colorForBackground;
+    singleDivElement.originalColor = colorForBackground;
   }
 }
 
