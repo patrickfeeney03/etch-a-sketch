@@ -51,6 +51,8 @@ function setListenersForShadowButtons() {
   shadowButtons.forEach((button) => {
     button.addEventListener("mousedown", shadowHandler);
   });
+
+  
 }
 
 function shadowHandler(event) {
@@ -65,23 +67,31 @@ function shadowHandler(event) {
     div.addEventListener("mousedown", handler);
     // Make sure that this listener gets deleted when another button is pressed?
   });
+
+  let myBody = document.querySelector("body");
+  myBody.addEventListener("mouseup", () => {
+    divs.forEach((div) => {
+      div.removeEventListener("mouseenter", resetBrightness);
+    });
+  });
+  myBody.addEventListener("mouseup", () => {
+    divs.forEach((div) => {
+      div.removeEventListener("mouseenter", handlerForChangingBackground);
+    });
+  });
 }
 
 function handler(e) {
   let elem = e.currentTarget;
   let resetBrightnessValue = "0";
   let divs = document.querySelectorAll(".col-div");
-  let myBody = document.querySelector("body");
+  
   if (elem.change === resetBrightnessValue) {
     resetBrightness(e);
     divs.forEach((div) => {
       div.addEventListener("mouseenter", resetBrightness);
     });
-    myBody.addEventListener("mouseup", () => {
-      divs.forEach((div) => {
-        div.removeEventListener("mouseenter", resetBrightness);
-      });
-    });
+
   } else {
 
     let elemChange = elem.change;
@@ -91,11 +101,7 @@ function handler(e) {
       div.addEventListener("mouseenter", handlerForChangingBackground);
     });
 
-    myBody.addEventListener("mouseup", () => {
-      divs.forEach((div) => {
-        div.removeEventListener("mouseenter", handlerForChangingBackground);
-      });
-    });
+ 
   }
 }
 
@@ -113,10 +119,10 @@ function changeBackgroundLightnessOfElement(lightnessChange, element, e) {
   let elementColor = window.getComputedStyle(element).getPropertyValue("background-color");
   let elementRgbIntArray = elementColor.match(/[\d\.]+/g).map(Number);
   let elementHslColor = rgb2Hsl(elementRgbIntArray[0], elementRgbIntArray[1], elementRgbIntArray[2]);
-  console.log(`Before change: ${elementHslColor}`);
+  //console.log(`Before change: ${elementHslColor}`);
   elementHslColor[2] = elementHslColor[2] + +lightnessChange;
   if (elementHslColor[2] < 100 && elementHslColor[2] > 0) {
-    console.log(`After change: ${elementHslColor}`);
+    //console.log(`After change: ${elementHslColor}`);
     let formattedHslString = `hsl(${elementHslColor[0]}, ${elementHslColor[1]}%, ${elementHslColor[2]}%)`;
     element.style.backgroundColor = formattedHslString;
   }
