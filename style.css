@@ -74,7 +74,6 @@ button:active {
 #middle-container {
   width: 100vw;
   align-items: start;
-  justify-content: center;
 }
 
 #left-col {
@@ -93,7 +92,7 @@ button:active {
 }
 
 .box {
-  flex: 1;
+  flex: 1 0 0%;
   display: flex;
   justify-content: center;
 }
@@ -197,6 +196,7 @@ button:active {
   grid-column: 3;
   filter: drop-shadow(6px 6px 0px #999);
   cursor: pointer;
+  pointer-events:painted;
 }
 
 #eraser:hover {

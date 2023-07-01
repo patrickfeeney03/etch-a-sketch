@@ -11,7 +11,8 @@ function createGrid(gridResolution) {
     let mainGridDiv = document.querySelector("#main-grid-div");
     mainGridDiv.appendChild(rowDiv);
 
-    setDivsStyle(gridResolution, 576);
+    let squareSizeInPx = 576;
+    setDivsStyle(gridResolution, squareSizeInPx);
   }
 }
 function clearGrid() {
