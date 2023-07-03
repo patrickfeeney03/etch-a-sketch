@@ -233,8 +233,6 @@ function setBackgroundOfCurrentTarget(event) {
   currentDiv.style.backgroundColor = colorForBackground;
   currentDiv.originalColor = colorForBackground;
 }
-
-
 // ^^^^ Color Painting ^^^^
 
 // vvvv Clear Button vvvv
@@ -252,11 +250,14 @@ function clearButtonHandler() {
   let allDivs = document.querySelectorAll(".col-div");
   allDivs.forEach((div) => {
     addAnimationToElement(div, "transition-background-color");
-    div.addEventListener("animationend", function handler() {
-      console.log("Finished transitioning");
-      div.removeEventListener("animationend", handler);
-      clearDivs();
-    });
+  });
+  // All divs have the same animation timing, so by knowing when the first div
+  // finished animating, it can be know when the animation for all divs have
+  // finished. So we proceed to clear divs.
+  let divToControlTiming = document.querySelector(".col-div");
+  divToControlTiming.addEventListener("animationend", function handler() {
+    clearDivs();
+    divToControlTiming.removeEventListener("animationend", handler);
   });
 }
 
@@ -281,7 +282,6 @@ function addAnimationToElementUsingIdOrClass(elementIdOrClass, animationName) {
 }
 
 function addAnimationToElement(element, animationName) {
-  element.classList.remove(animationName);
   void element.offsetWidth;
   element.classList.add(animationName);
 
