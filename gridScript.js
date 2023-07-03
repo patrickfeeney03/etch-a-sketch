@@ -24,11 +24,33 @@ function clearGrid() {
 // vvvv Grid Sizing vvvv
 function setGridSizeButtonsListeners() {
   let buttons = document.querySelectorAll(".grid-size-button");
+  
   buttons.forEach(button => {
-    button.addEventListener("click", function () {
-      clearGrid();
-      createGrid(Number(button.getAttribute("data-key")));
-    });
+    button.addEventListener("click", animateGridSizeChange);
+  });
+}
+
+function animateGridSizeChange(e) {
+  let gridContainer = document.querySelector("#main-grid-div");
+  let sizeButtonPressed = e.currentTarget;
+
+  // Animate out, add temporary class, remove animation class. 3 things
+  gridContainer.classList.add("animation-move-grid-away");
+  gridContainer.addEventListener("animationend", function handler1() {
+    gridContainer.classList.add("keep-grid-away");
+    gridContainer.classList.remove("animation-move-grid-away");
+    gridContainer.removeEventListener("animationend", handler1);
+
+    clearGrid();
+    createGrid(Number(sizeButtonPressed.getAttribute("data-key"))); 
+
+    // Remove temporary class, animate in, remove animation class
+    gridContainer.classList.add("animation-move-grid-back");
+    gridContainer.classList.remove("keep-grid-away"); // Maybe move this one before?
+    gridContainer.addEventListener("animationend", function handler2() {
+      gridContainer.classList.remove("animation-move-grid-back");
+      gridContainer.removeEventListener("animationend", handler2);
+    });    
   });
 }
 // ^^^^ Grid Sizing ^^^^
@@ -63,20 +85,13 @@ function shadowHandler(event) {
     div.change = buttonBrightnessChange;
     div.addEventListener("mousedown", handlerDivsBrightness);
   });
-
-  window.addEventListener("mouseup", () => {
-    divs.forEach((div) => {
-      div.removeEventListener("mouseenter", handlerForChangingBackground);
-      div.removeEventListener("mouseenter", resetLightnessOfDiv);
-    });
-  });
 }
 
 function handlerDivsBrightness(e) {
   let divClicked = e.currentTarget;
   const resetBrightnessValue = "0";
   let divs = document.querySelectorAll(".col-div");
-
+  
   if (divClicked.change === resetBrightnessValue) {
     resetLightnessOfDiv(e);
     divs.forEach((div) => {
@@ -88,6 +103,14 @@ function handlerDivsBrightness(e) {
       div.addEventListener("mouseenter", handlerForChangingBackground);
     });
   }
+  
+  window.addEventListener("mouseup", function mouseUpShadowHandler() {
+    divs.forEach((div) => {
+      div.removeEventListener("mouseenter", handlerForChangingBackground);
+      div.removeEventListener("mouseenter", resetLightnessOfDiv);
+    });
+    window.removeEventListener("mouseup", mouseUpShadowHandler);
+  });
 }
 
 function handlerForChangingBackground(e) {
@@ -147,12 +170,6 @@ function coloringButtonsHandler(event) {
     div.myColor = color;
     div.addEventListener("mousedown", setDivBackgroundColor);
   });
-
-  window.addEventListener("mouseup", () => {
-    divs.forEach((div) => {
-      div.removeEventListener("mouseenter", setBackgroundOfCurrentTarget);
-    });
-  });
 }
 
 function removeColoring() {
@@ -171,6 +188,14 @@ function setDivBackgroundColor(event) {
   let allDivs = document.querySelectorAll(".col-div");
   allDivs.forEach((div) => {
     div.addEventListener("mouseenter", setBackgroundOfCurrentTarget);
+  });
+
+  window.addEventListener("mouseup", function mouseUpColorHandler() {
+    allDivs.forEach((div) => {
+      div.removeEventListener("mouseenter", setBackgroundOfCurrentTarget);
+    });
+    window.removeEventListener("mouseup", mouseUpColorHandler);
+    console.log("Removed mouseup listener");
   });
 }
 
@@ -218,11 +243,12 @@ function addClearButtonListener() {
   clearButton.addEventListener("click", clearButtonHandler);
 }
 
+// This function will shake the grid and transition to being completely clear.
 function clearButtonHandler() {
-
   addAnimationToElementUsingIdOrClass("#main-grid-div", "shake-grid");
-
-
+  // Transition from the current color of the div to the default 'beige' color.
+  // After finishing the transition it will actually clear the div and set it 
+  // to the default 'beige' color.
   let allDivs = document.querySelectorAll(".col-div");
   allDivs.forEach((div) => {
     addAnimationToElement(div, "transition-background-color");
@@ -279,6 +305,7 @@ function helpButtonHandler(event) {
   helpWindowContainer.classList.toggle("open-popup");
 }
 // ^^^^ Help Button ^^^^
+
 
 createGrid(16);
 setGridSizeButtonsListeners();

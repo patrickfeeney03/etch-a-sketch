@@ -323,7 +323,7 @@ button:active {
 }
 
 .transition-background-color {
-  animation: background-color 0.82s both;
+  animation: background-color 0.82s cubic-bezier(.36,.07,.19,.97) both;
 }
 
 @keyframes background-color {
@@ -349,4 +349,36 @@ button:active {
   40%, 60% {
     transform: translateX(4px);
   }
+}
+
+.animation-move-grid-away {
+  animation: move-grid-away 0.4s cubic-bezier(0.3, 0.01, 0, 0.98) forwards;
+}
+
+@keyframes move-grid-away {
+  from {
+    transform: translateY(0px);
+  }
+
+  to {
+    transform: translateY(-750px);
+  }
+}
+
+.animation-move-grid-back {
+  animation: move-grid-back 0.4s cubic-bezier(0.96, -0.01, 0.21, 1.01) forwards;
+}
+
+@keyframes move-grid-back {
+  from {
+    transform: translateY(-750px);
+  }
+
+  to {
+    transform: translateY(0px);
+  }
+}
+
+.keep-grid-away {
+  transform: translateY(-750px);
 }
