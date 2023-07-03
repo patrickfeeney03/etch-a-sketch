@@ -1,4 +1,4 @@
-// Grid vvvvvv
+// vvvv Grid vvvv
 function createGrid(gridResolution) {
   for (let row = 0; row < gridResolution; row++) {
     const rowDiv = document.createElement("div");
@@ -19,9 +19,9 @@ function clearGrid() {
   let mainGridDiv = document.querySelector("#main-grid-div");
   mainGridDiv.innerHTML = "";
 }
-// Grid ^^^^^^^
+// ^^^^ Grid ^^^^
 
-// Grid Sizing vvvv
+// vvvv Grid Sizing vvvv
 function setGridSizeButtonsListeners() {
   let buttons = document.querySelectorAll(".grid-size-button");
   buttons.forEach(button => {
@@ -31,7 +31,7 @@ function setGridSizeButtonsListeners() {
     });
   });
 }
-// Grid Sizing ^^^^
+// ^^^^ Grid Sizing ^^^^
 
 // vvvv Grid Styling vvvv
 function setDivsStyle(amountDivs, canvasSize) {
@@ -76,7 +76,7 @@ function handlerDivsBrightness(e) {
   let divClicked = e.currentTarget;
   const resetBrightnessValue = "0";
   let divs = document.querySelectorAll(".col-div");
-  
+
   if (divClicked.change === resetBrightnessValue) {
     resetLightnessOfDiv(e);
     divs.forEach((div) => {
@@ -191,12 +191,12 @@ function generateRandomHexColor() {
 }
 
 // vvvv David Mihal's Function vvvv
-function randomColor(brightness){
-  function randomChannel(brightness){
-    var r = 255-brightness;
-    var n = 0|((Math.random() * r) + brightness);
+function randomColor(brightness) {
+  function randomChannel(brightness) {
+    var r = 255 - brightness;
+    var n = 0 | ((Math.random() * r) + brightness);
     var s = n.toString(16);
-    return (s.length==1) ? '0'+s : s;
+    return (s.length == 1) ? '0' + s : s;
   }
   return '#' + randomChannel(brightness) + randomChannel(brightness) + randomChannel(brightness);
 }
@@ -215,13 +215,53 @@ function setBackgroundOfCurrentTarget(event) {
 // vvvv Clear Button vvvv
 function addClearButtonListener() {
   let clearButton = document.querySelector("#clear-button");
-  clearButton.addEventListener("click", clearDivs);
+  clearButton.addEventListener("click", clearButtonHandler);
+}
+
+function clearButtonHandler() {
+
+  addAnimationToElementUsingIdOrClass("#main-grid-div", "shake-grid");
+
+
+  let allDivs = document.querySelectorAll(".col-div");
+  allDivs.forEach((div) => {
+    addAnimationToElement(div, "transition-background-color");
+    div.addEventListener("animationend", function handler() {
+      console.log("Finished transitioning");
+      div.removeEventListener("animationend", handler);
+      clearDivs();
+    });
+  });
 }
 
 function clearDivs() {
   let allGridDivs = document.querySelectorAll(".col-div");
   allGridDivs.forEach((div) => {
     div.style.backgroundColor = "rgb(231, 206, 166)";
+    div.originalColor = "rgb(231, 206, 166)";
+  });
+}
+
+function addAnimationToElementUsingIdOrClass(elementIdOrClass, animationName) {
+  let element = document.querySelector(elementIdOrClass);
+  element.classList.remove(animationName);
+  void element.offsetWidth;
+  element.classList.add(animationName);
+
+  element.addEventListener("animationend", function handler() {
+    element.classList.remove(animationName);
+    element.removeEventListener("animationend", handler);
+  });
+}
+
+function addAnimationToElement(element, animationName) {
+  element.classList.remove(animationName);
+  void element.offsetWidth;
+  element.classList.add(animationName);
+
+  element.addEventListener("animationend", function handler() {
+    element.classList.remove(animationName);
+    element.removeEventListener("animationend", handler);
   });
 }
 // ^^^^ Clear Button ^^^^
